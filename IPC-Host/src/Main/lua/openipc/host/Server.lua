@@ -4,6 +4,7 @@ return function (Port, Host)
     end
     require("weblit-websocket")
     local App = require("weblit").app
+    local Proxy = Import("openipc.host.Proxy"):new()
 
     App.bind(
         {
@@ -26,17 +27,10 @@ return function (Port, Host)
 
     App.websocket(
         {
-            path = "/v1/connect"
+            path = "/v1/connect/:Channel/:Name"
         },
         function (Request, Read, Write)
-            -- Log the request headers
-            p(req)
-            -- Log and echo all messages
-            for message in read do
-                write(message)
-            end
-            -- End the stream
-            write()
+            Proxy:NewConnection(Request, Read, Write)
         end
     )
     
