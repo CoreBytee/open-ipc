@@ -52,6 +52,7 @@ local Handlers = {
             TypeWriter.Logger.Info("Tried to send to a not existsing connection (%s)", To)
             return
         end
+        p(Payload)
         self.Connections[Channel][To].Write(
             {payload = Json.encode(Payload)}
         )
