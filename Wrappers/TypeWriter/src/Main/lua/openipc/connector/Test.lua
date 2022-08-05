@@ -8,15 +8,19 @@ local Other = ({[1] = 2, [2] = 1})[Id]
 Connection:RegisterMessage(
     "Echo",
     function (Data, From)
-        p(Data)
+        p("Echo", Data, From)
         return Data
     end
 )
 
-Connection:Send(
+p(Connection:Send(
     Other,
     "Echo",
     {
         Message = "Hello World"
     }
-)
+))
+
+Wait(5)
+
+Connection:Disconnect()

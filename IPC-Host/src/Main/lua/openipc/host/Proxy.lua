@@ -44,7 +44,7 @@ local Handlers = {
         local Channel = Connection.Channel
         local Name = Connection.Name
         local To = Payload.To
-
+        
         Payload.From = Name
         Payload.Type = "Message"
 
