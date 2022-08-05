@@ -20,7 +20,3 @@ p(Connection:Send(
         Message = "Hello World"
     }
 ))
-
-Wait(5)
-
-Connection:Disconnect()
