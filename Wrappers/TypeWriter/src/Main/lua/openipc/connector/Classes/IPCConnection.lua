@@ -49,7 +49,7 @@ function Connection:HandleIncoming(D)
         TypeWriter.Logger.Info("Tried to handle a not existsing message (%s)", D.Name)
         return
     end
-    local ReturnData = self.Handlers[D.Name](D.Data, Return, D.From, D.Sequence)
+    local ReturnData = self.Handlers[D.Name](D.Data, D.From, D.Sequence)
     self:Write(
         "Message",
         {
