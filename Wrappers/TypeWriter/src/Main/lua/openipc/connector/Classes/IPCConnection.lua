@@ -31,7 +31,7 @@ function Connection:initialize(Channel, Name)
             self:HandleIncoming(Decoded)
         end
         self:Emit("Disconnected")
-        self:Emit("Return", {Disconnected = true})
+        self:Emit("Return", {IPC_DISCONNECTED = true})
     end)()
 end
 
@@ -90,7 +90,7 @@ function Connection:Send(To, Name, Payload)
             return Data.Sequence == Sequence or Data.Disconnected == true
         end
     )
-    if ReturnedData.Disconnected == true then
+    if ReturnedData.IPC_DISCONNECTED == true then
         return {IPC_DISCONNECTED = true, IPC_ERROR = true}
     else
         return ReturnedData.Data
