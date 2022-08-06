@@ -1,0 +1,1 @@
+IpcClient = require("./index.js")
