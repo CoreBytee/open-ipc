@@ -1,1 +1,1 @@
-IpcClient = require("./index.js")
+OpenIPC = require("./index.js")
