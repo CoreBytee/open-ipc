@@ -1,5 +1,5 @@
 const WaitForEmitter = require('./lib/WaitForEmitter.js')
-const WebSocket = require("ws")
+const WebSocket = require("universal-websocket-client")
 
 //https://stackoverflow.com/a/1349426
 function RandomString(length) {
@@ -13,7 +13,7 @@ function RandomString(length) {
     return result
 }
 
-class Connection extends WaitForEmitter {
+class IpcClient extends WaitForEmitter {
     constructor(Channel, Name) {
         super()
         this.Channel = Channel
@@ -23,26 +23,17 @@ class Connection extends WaitForEmitter {
         var ThisClass = this
 
         this.WebSocket = new WebSocket(`ws://localhost:25665/v1/connect/${Channel}/${Name}`)
-        this.WebSocket.on(
-            "open",
-            function () {
-                ThisClass.emit("Connected")
-            }
-        )
-        this.WebSocket.on(
-            "close",
-            function () {
-                ThisClass.emit("Disconnected")
-                ThisClass.emit("Return", {IPC_DISCONNECTED: true})
-            }
-        )
-        this.WebSocket.on(
-            "message",
-            async function (data) {
-                var Decoded = JSON.parse(data)
-                ThisClass.HandleIncoming(Decoded)
-            }
-        )
+        this.WebSocket.onopen = function () {
+            ThisClass.emit("Connected")
+        }
+        this.WebSocket.onclose = function () {
+            ThisClass.emit("Disconnected")
+            ThisClass.emit("Return", {IPC_DISCONNECTED: true})
+        }
+        this.WebSocket.onmessage =async function (data) {
+            var Decoded = JSON.parse(data)
+            ThisClass.HandleIncoming(Decoded)
+        }
         
 
     }
@@ -112,4 +103,4 @@ class Connection extends WaitForEmitter {
     }
 }
 
-module.exports = Connection
+module.exports = IpcClient
