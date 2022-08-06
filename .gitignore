@@ -1,3 +1,5 @@
 *.ps1
 *.sh
 .TypeWriter
+/Build/
+!Start_Build.ps1
