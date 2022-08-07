@@ -50,6 +50,24 @@ local Handlers = {
 
         if self.Connections[Channel][To] == nil then
             TypeWriter.Logger.Info("Tried to send to a not existsing connection (%s)", To)
+            Connection.Write(
+                {
+                    payload = Json.encode(
+                        {
+                            Type = "Message",
+                            MessageType = "Return",
+                            From = Name,
+                            To = Name,
+                            Sequence = Payload.Sequence,
+                            Data = {
+                                IPC_ERROR = true,
+                                IPC_ERROR_MESSAGE = "The recipient is not connected.",
+                                IPC_NOT_CONNECTED = true
+                            }
+                        }
+                    )
+                }
+            )
             return
         end
         p(Payload)

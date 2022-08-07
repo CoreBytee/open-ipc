@@ -28,6 +28,7 @@ function Connection:initialize(Channel, Name)
         for Message in Read do
             local Payload = Message.payload
             local Decoded = Json.decode(Payload)
+            p(Decoded)
             self:HandleIncoming(Decoded)
         end
         self:Emit("Disconnected")
