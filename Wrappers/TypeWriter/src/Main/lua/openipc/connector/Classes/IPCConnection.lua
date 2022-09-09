@@ -28,7 +28,9 @@ function Connection:initialize(Channel, Name)
         for Message in Read do
             local Payload = Message.payload
             local Decoded = Json.decode(Payload)
-            self:HandleIncoming(Decoded)
+            coroutine.wrap(function ()
+                self:HandleIncoming(Decoded)
+            end)()
         end
         self:Emit("Disconnected")
         self:Emit("Return", {IPC_DISCONNECTED = true})
