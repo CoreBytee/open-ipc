@@ -2,4 +2,4 @@
 *.sh
 .TypeWriter
 /Build/
-!Start_Build.ps1
+/Wrappers/TypeWriter/src/Main/resources/IPC-Host.twr
