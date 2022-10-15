@@ -2,10 +2,10 @@
 
 return { InfoVersion = 1, -- Dont touch this
 
-    ID = "IPC-Connector", -- A unique id 
-    Name = "IPC-Connector",
-    Description = "A IPC-Connector",
-    Version = "1.0.0",
+    ID = "OpenIPC-TypeWriter", -- A unique id 
+    Name = "OpenIPC-TypeWriter",
+    Description = "OpenIPC-TypeWriter Client",
+    Version = "1.1.0",
 
     Author = {
         Developers = {
