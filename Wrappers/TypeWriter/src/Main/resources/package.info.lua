@@ -5,7 +5,7 @@ return { InfoVersion = 1, -- Dont touch this
     ID = "OpenIPC-TypeWriter", -- A unique id 
     Name = "OpenIPC-TypeWriter",
     Description = "OpenIPC-TypeWriter Client",
-    Version = "1.1.0",
+    Version = "1.2.0",
 
     Author = {
         Developers = {
